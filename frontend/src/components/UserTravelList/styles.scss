@@ -6,9 +6,6 @@
     .plan-description {
         width: 100%;
         max-width: 800px;
-    }
-
-    .plan-description {
         font-size: 1.5rem;
         font-weight: 800;
         text-align: center;
@@ -16,15 +13,77 @@
         @include boxBorder(no);
     }
 
-    .UserTravelList-wrapper {
-        width: 800px;
-        border: 1px solid red;
-        margin-top: 10px;
-        margin-bottom: 10px;
+    .plan-description2 {
+        font-size: 0.5rem;
+        font-weight: 800;
+        text-align: center;
+        padding: 10px;
+        
 
-        .UserTravelList-content {
-            display: flex;
-            justify-content: center;
+        .UserTravelList-wrapper {
+            width: 800px;
+            border: 1px solid green;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            
+
+            .UserTravelList-content {
+                display: flex;
+                color: black;
+                font-size: 1.5em;
+                    
+                border: 1px solid black;
+                position: relative;
+
+                .UserTravelList-title1{
+                    flex: 1;
+                    text-align: left;
+                    font-size: 25px
+                    
+                }
+                .UserTravelList-title2{
+                    flex: 2;
+                    text-align: left;
+                    font-size: 15px
+                }
+                .UserTravelList-day{
+                    flex: 1;
+                    text-align: left;
+                    font-size: 25px
+                    
+                }
+                .UserTravelList-button{
+                    flex: 1;
+
+                    position: absolute; 
+                    bottom: 0;
+                    right: 0;
+
+                    width: 50px;
+                    text-align: center;        
+                    display: inline-block;
+                    border: 1px solid $light-blue;
+                    border-radius: 15px;
+                    padding: 10px;
+                    font-weight: bold;
+                    font-size: 12px;
+                    color: white;
+                    margin-right: 3px;
+                    margin-bottom: 3px;
+                    background-color: $light-blue;
+
+                    &:hover{
+                        background-color: white;
+                        color: $light-blue;
+                        border: 1px solid #e6e6e6;
+                    }
+                }
+
+                .UserTravelList-content__right {
+                    display: flex;
+                    flex-direction: column;
+                }
+            }
         }
     }
 }

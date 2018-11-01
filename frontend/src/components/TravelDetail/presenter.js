@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ImageGallery from "react-image-gallery";
+import styles from './styles.scss';
 
 const TravelDetail = props => {
   if (props.loading) {
@@ -75,22 +76,19 @@ class MyComponent extends Component {
   componentDidUpdate() {
 
     const {
-      travel: { main_image, travel_plan, owner, travel_region }
+      travel: { main_image, travel_plan, owner, travel_region, title }
     } = this.props;
 
-    let result_img;
-    
+    let result_img, result_info, merge_result_info;
     if(travel_plan) {
       result_img = travel_plan.map(plan =>
         plan.plan_images.map(imgs => ({
           src: imgs.file,
-          label: imgs.location
+          label: imgs.location,
+          description: imgs.caption
         }))); // 세부 계획 이미지들만 뽑아내기
       }
       
-    console.log(result_img);
-
-    let result_info;
     
     if(travel_plan) {
       result_info = travel_plan.map(plan => ({
@@ -99,22 +97,23 @@ class MyComponent extends Component {
       })); // 세부 계획 정보만 뽑아내기
     }
 
+    // 메인이미지 + 세부계획 이미지 리스트
+
     let merge_result_img = [].concat.apply([], result_img); // 세부계획이미지 1차원 배열로 만들기
     merge_result_img = [{
       src: main_image,
-      label: travel_region
+      label: travel_region,
+      description: title
     }, ...merge_result_img]; // 메인이미지 + 세부계획 이미지
     
-    console.log(merge_result_img);
-
     const g_image = merge_result_img.map(img => ({
       original: img.src,
       thumbnail: img.src,
-      thumbnailLabel: img.label
+      thumbnailLabel: img.label,
+      description: img.description
     }));
 
 
-    let merge_result_info;
     
     if(result_info){
       merge_result_info = [].concat.apply([], result_info);
@@ -166,13 +165,13 @@ const RenderTravelPlanList = props => (
     {props.travel_plan.map(plan => (
       <div className="TravelPlanList-wrapper">
         <div className="TravelPlanList-content_left">
-          <h1 className="TravelPlanList-content">제목 : {plan.title}</h1>
-          <h1 className="TravelPlanList-content">내용 : {plan.content}</h1>
-          <h1 className="TravelPlanList-content">비용 : {plan.price}</h1>
-          <h1 className="TravelPlanList-content">일자 : {plan.travel_day}</h1>
+          <h1 className="TravelPlanList-content TravelPlanList-content__title">{plan.title}</h1>
+          <h1 className="TravelPlanList-content TravelPlanList-content__content">{plan.content}</h1>
+          <h1 className="TravelPlanList-content TravelPlanList-content__price">비용 : {plan.price}</h1>
+          <h1 className="TravelPlanList-content TravelPlanList-content__date">일자 : {plan.travel_day}</h1>
         </div>
         <div className="TravelPlanList-content_right">
-          <img src={plan.plan_images[0] ? plan.plan_images[0].file : require("images/logo.png")} alt="temp" width="400" height="400"/>
+          <img src={plan.plan_images[0] ? plan.plan_images[0].file : require("images/2-(400x400).jpg")} alt="temp" width="400" height="398"/>
         </div>
       </div>
     ))}

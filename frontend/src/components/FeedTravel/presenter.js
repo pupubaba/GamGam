@@ -25,9 +25,10 @@ const FeedImage = (props) => (
 
 const FeedContent = (props) => (
     <div className="feed-content">
-      <h1 className="feed-content-title">{props.title}</h1>
+      {/* <h1 className="feed-content-title">{props.title}</h1> */}
       <p className="feed-content-attraction">여행지 : {props.travel_region} </p>
       <p className="feed-content-duration">여행기간 : {props.start_at} - {props.end_at} </p>
+      <div className="feed-content-travel_region">{props.travel_plan.map((plan, idx) => <TravelPlanRegion travel_region={plan.travel_region} key={idx} />)}</div>
       <div className="feed-content-bottom">  
         <h1 className="feed-content-username">여행자 : {props.owner.username}</h1>  
         <div className="feed-content-tags">
@@ -36,6 +37,10 @@ const FeedContent = (props) => (
       </div>
     </div>
 );
+
+const TravelPlanRegion = (props) => (
+    <h1 className="TravelPlanRegion-travel_region">- {props.travel_region}</h1>
+)
 
 FeedTravel.contextTypes = {
     t: PropTypes.func.isRequired
